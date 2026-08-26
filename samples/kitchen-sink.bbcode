@@ -1,0 +1,17 @@
+[b]Malformed input is handled gracefully.[/b]
+
+An unclosed tag: [i]this italic never closes.
+
+A stray closing tag: [/u] on its own.
+
+Overlapping tags: [b]bold [i]both[/b] italic[/i].
+
+An unknown tag: [wibble]stays exactly as written[/wibble].
+
+A list item outside a list: [*]lonely.
+
+Brackets that are not tags: see [1], [2] and [ 3 ].
+
+[code]
+Inside a code block nothing is parsed: [b]not bold[/b] and [/i] is fine.
+[/code]

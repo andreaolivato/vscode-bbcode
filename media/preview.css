@@ -1,0 +1,525 @@
+/*
+ * Preview stylesheet.
+ *
+ * The palette lives in custom properties so the four `bbcode.preview.theme`
+ * values only have to redefine tokens. The same file is inlined into exported
+ * standalone HTML, which is why the dark palette is also reachable through
+ * `prefers-color-scheme` and not only through the VS Code body classes.
+ */
+
+:root {
+    --bb-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+    --bb-mono-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    --bb-font-size: 14px;
+    --bb-max-width: 900px;
+
+    --bb-bg: #ffffff;
+    --bb-surface: #f7f8fa;
+    --bb-surface-strong: #eef0f4;
+    --bb-fg: #1f2328;
+    --bb-muted: #656d76;
+    --bb-border: #d5d9e0;
+    --bb-accent: #1f6feb;
+    --bb-link: #0969da;
+    --bb-link-hover: #0a5cc7;
+    --bb-quote-bar: #b8c0cc;
+    --bb-code-bg: #f4f5f7;
+    --bb-code-fg: #24292f;
+    --bb-mark-bg: #fff3bf;
+    --bb-shadow: 0 1px 2px rgba(16, 22, 26, 0.08);
+    --bb-radius: 6px;
+}
+
+/* --------------------------------------------------------------- dark mode */
+
+@media (prefers-color-scheme: dark) {
+    html.bb-theme-auto {
+        --bb-bg: #1b1f23;
+        --bb-surface: #22272e;
+        --bb-surface-strong: #2d333b;
+        --bb-fg: #d7dee6;
+        --bb-muted: #8b949e;
+        --bb-border: #3a424c;
+        --bb-accent: #4c8eff;
+        --bb-link: #6cb0ff;
+        --bb-link-hover: #8cc2ff;
+        --bb-quote-bar: #4b5563;
+        --bb-code-bg: #161b22;
+        --bb-code-fg: #d7dee6;
+        --bb-mark-bg: #5c4a10;
+        --bb-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Inside VS Code the body class is authoritative and beats the media query. */
+html.bb-theme-auto body.vscode-dark,
+html.bb-theme-auto body.vscode-high-contrast:not(.vscode-high-contrast-light),
+html.bb-theme-forum-dark body {
+    --bb-bg: #1b1f23;
+    --bb-surface: #22272e;
+    --bb-surface-strong: #2d333b;
+    --bb-fg: #d7dee6;
+    --bb-muted: #8b949e;
+    --bb-border: #3a424c;
+    --bb-accent: #4c8eff;
+    --bb-link: #6cb0ff;
+    --bb-link-hover: #8cc2ff;
+    --bb-quote-bar: #4b5563;
+    --bb-code-bg: #161b22;
+    --bb-code-fg: #d7dee6;
+    --bb-mark-bg: #5c4a10;
+    --bb-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+html.bb-theme-auto body.vscode-light,
+html.bb-theme-forum-light body {
+    --bb-bg: #ffffff;
+    --bb-surface: #f7f8fa;
+    --bb-surface-strong: #eef0f4;
+    --bb-fg: #1f2328;
+    --bb-muted: #656d76;
+    --bb-border: #d5d9e0;
+    --bb-code-bg: #f4f5f7;
+    --bb-code-fg: #24292f;
+}
+
+/* Borrow the editor's exact colours. */
+html.bb-theme-editor body {
+    --bb-bg: var(--vscode-editor-background, #ffffff);
+    --bb-surface: var(--vscode-editorWidget-background, #f7f8fa);
+    --bb-surface-strong: var(--vscode-editorWidget-background, #eef0f4);
+    --bb-fg: var(--vscode-editor-foreground, #1f2328);
+    --bb-muted: var(--vscode-descriptionForeground, #656d76);
+    --bb-border: var(--vscode-editorWidget-border, #d5d9e0);
+    --bb-accent: var(--vscode-focusBorder, #1f6feb);
+    --bb-link: var(--vscode-textLink-foreground, #0969da);
+    --bb-link-hover: var(--vscode-textLink-activeForeground, #0a5cc7);
+    --bb-quote-bar: var(--vscode-textBlockQuote-border, #b8c0cc);
+    --bb-code-bg: var(--vscode-textCodeBlock-background, #f4f5f7);
+    --bb-code-fg: var(--vscode-editor-foreground, #24292f);
+    --bb-font-family: var(--vscode-editor-font-family, var(--bb-mono-family));
+}
+
+/* ----------------------------------------------------------------- layout */
+
+* {
+    box-sizing: border-box;
+}
+
+body.bb-preview {
+    margin: 0;
+    padding: 0;
+    background: var(--bb-bg);
+    color: var(--bb-fg);
+    font-family: var(--bb-font-family);
+    font-size: var(--bb-font-size);
+    line-height: 1.6;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+}
+
+.bb-content {
+    max-width: var(--bb-max-width);
+    margin: 0 auto;
+    padding: 20px 24px 64px;
+}
+
+.bb-standalone .bb-content {
+    padding-top: 32px;
+}
+
+.bb-empty {
+    color: var(--bb-muted);
+    font-style: italic;
+}
+
+/* ------------------------------------------------------------- typography */
+
+.bb-heading {
+    margin: 1.4em 0 0.5em;
+    line-height: 1.25;
+    font-weight: 600;
+}
+
+.bb-content > .bb-heading:first-child {
+    margin-top: 0;
+}
+
+h1.bb-heading {
+    font-size: 1.9em;
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid var(--bb-border);
+}
+
+h2.bb-heading {
+    font-size: 1.5em;
+    padding-bottom: 0.2em;
+    border-bottom: 1px solid var(--bb-border);
+}
+
+h3.bb-heading {
+    font-size: 1.25em;
+}
+
+h4.bb-heading {
+    font-size: 1.1em;
+}
+
+h5.bb-heading,
+h6.bb-heading {
+    font-size: 1em;
+    color: var(--bb-muted);
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+.bb-underline {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.bb-highlight {
+    /* Highlight colours are light by convention; the renderer overrides the
+       foreground when it can prove the background is dark. */
+    padding: 0 0.15em;
+    border-radius: 2px;
+    color: #1f2328;
+}
+
+.bb-emoticon {
+    font-style: normal;
+    cursor: default;
+}
+
+.bb-mention {
+    color: var(--bb-accent);
+    font-weight: 600;
+}
+
+.bb-time {
+    color: var(--bb-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.bb-hr {
+    height: 1px;
+    margin: 1.6em 0;
+    border: 0;
+    background: var(--bb-border);
+}
+
+/* ----------------------------------------------------------------- links */
+
+.bb-link {
+    color: var(--bb-link);
+    text-decoration: none;
+}
+
+.bb-link:hover,
+.bb-link:focus-visible {
+    color: var(--bb-link-hover);
+    text-decoration: underline;
+}
+
+.bb-media-link,
+.bb-blocked-image {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px dashed var(--bb-border);
+    border-radius: var(--bb-radius);
+    color: var(--bb-muted);
+    font-size: 0.9em;
+}
+
+/* --------------------------------------------------------------- structure */
+
+.bb-align {
+    margin: 0 0 1em;
+}
+
+.bb-align-left {
+    text-align: left;
+}
+
+.bb-align-center {
+    text-align: center;
+}
+
+.bb-align-right {
+    text-align: right;
+}
+
+.bb-align-justify {
+    text-align: justify;
+}
+
+.bb-indent {
+    margin-bottom: 1em;
+}
+
+.bb-float-left {
+    float: left;
+    margin: 0 1em 0.5em 0;
+}
+
+.bb-float-right {
+    float: right;
+    margin: 0 0 0.5em 1em;
+}
+
+.bb-quote {
+    margin: 0 0 1em;
+    padding: 10px 14px;
+    border: 1px solid var(--bb-border);
+    border-left: 4px solid var(--bb-quote-bar);
+    border-radius: var(--bb-radius);
+    background: var(--bb-surface);
+}
+
+.bb-quote-head {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--bb-border);
+    color: var(--bb-muted);
+    font-size: 0.9em;
+}
+
+.bb-quote-author {
+    color: var(--bb-fg);
+    font-weight: 600;
+}
+
+.bb-quote-body > *:last-child,
+.bb-spoiler-body > *:last-child,
+.bb-box-body > *:last-child {
+    margin-bottom: 0;
+}
+
+.bb-spoiler {
+    margin: 0 0 1em;
+    border: 1px solid var(--bb-border);
+    border-radius: var(--bb-radius);
+    background: var(--bb-surface);
+}
+
+.bb-spoiler > summary {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.bb-spoiler > summary:hover {
+    background: var(--bb-surface-strong);
+}
+
+.bb-spoiler-body {
+    padding: 0 12px 10px;
+}
+
+.bb-box {
+    margin: 0 0 1em;
+    border: 1px solid var(--bb-border);
+    border-radius: var(--bb-radius);
+    background: var(--bb-surface);
+    box-shadow: var(--bb-shadow);
+}
+
+.bb-box-head {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--bb-border);
+    font-weight: 600;
+}
+
+.bb-box-body {
+    padding: 10px 12px;
+}
+
+/* ------------------------------------------------------------------ lists */
+
+.bb-list {
+    margin: 0 0 1em;
+    padding-left: 1.8em;
+}
+
+.bb-list .bb-list {
+    margin-bottom: 0;
+}
+
+.bb-list li {
+    margin: 0.2em 0;
+}
+
+/* ------------------------------------------------------------------ media */
+
+.bb-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--bb-radius);
+    vertical-align: middle;
+}
+
+.bb-embed {
+    position: relative;
+    margin: 0 0 1em;
+    padding-top: 56.25%;
+    max-width: 720px;
+    border-radius: var(--bb-radius);
+    overflow: hidden;
+    background: #000;
+}
+
+.bb-embed-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.bb-video {
+    display: block;
+    max-width: 100%;
+    margin: 0 0 1em;
+    border-radius: var(--bb-radius);
+}
+
+.bb-audio {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 0 1em;
+}
+
+.bb-attachment {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid var(--bb-border);
+    border-radius: 12px;
+    background: var(--bb-surface);
+    font-size: 0.9em;
+}
+
+/* ------------------------------------------------------------------- code */
+
+.bb-inline-code,
+.bb-monospace {
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    background: var(--bb-code-bg);
+    color: var(--bb-code-fg);
+    font-family: var(--bb-mono-family);
+    font-size: 0.9em;
+}
+
+.bb-code {
+    margin: 0 0 1em;
+    border: 1px solid var(--bb-border);
+    border-radius: var(--bb-radius);
+    background: var(--bb-code-bg);
+    overflow: hidden;
+}
+
+.bb-code-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--bb-border);
+    background: var(--bb-surface-strong);
+    color: var(--bb-muted);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.bb-copy {
+    padding: 2px 8px;
+    border: 1px solid var(--bb-border);
+    border-radius: 4px;
+    background: var(--bb-surface);
+    color: var(--bb-muted);
+    font: inherit;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.bb-copy:hover {
+    color: var(--bb-fg);
+    border-color: var(--bb-accent);
+}
+
+.bb-copy.is-copied {
+    color: var(--bb-accent);
+    border-color: var(--bb-accent);
+}
+
+.bb-code-body,
+.bb-pre {
+    margin: 0;
+    padding: 10px 12px;
+    overflow-x: auto;
+    color: var(--bb-code-fg);
+    font-family: var(--bb-mono-family);
+    font-size: 0.9em;
+    line-height: 1.5;
+    tab-size: 4;
+}
+
+.bb-pre {
+    margin-bottom: 1em;
+    border: 1px solid var(--bb-border);
+    border-radius: var(--bb-radius);
+    background: var(--bb-code-bg);
+    white-space: pre-wrap;
+}
+
+.bb-code-body code {
+    font: inherit;
+}
+
+/* ----------------------------------------------------------------- tables */
+
+.bb-table-wrap {
+    margin: 0 0 1em;
+    overflow-x: auto;
+}
+
+.bb-table {
+    border-collapse: collapse;
+    width: auto;
+    min-width: 40%;
+}
+
+.bb-table th,
+.bb-table td {
+    padding: 6px 12px;
+    border: 1px solid var(--bb-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.bb-table th {
+    background: var(--bb-surface-strong);
+    font-weight: 600;
+}
+
+.bb-table tr:nth-child(even) td {
+    background: var(--bb-surface);
+}
+
+/* ----------------------------------------------------------------- print */
+
+@media print {
+    .bb-copy,
+    .bb-embed {
+        display: none;
+    }
+
+    .bb-content {
+        max-width: none;
+    }
+}

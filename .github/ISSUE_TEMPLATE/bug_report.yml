@@ -1,0 +1,68 @@
+name: Bug report
+description: Something renders wrong, or the extension misbehaves.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. The BBCode that triggers it is the single most
+        useful thing you can include.
+
+  - type: textarea
+    id: bbcode
+    attributes:
+      label: BBCode that reproduces it
+      description: The smallest snippet that still shows the problem.
+      render: text
+      placeholder: |
+        [list]
+        [*]one
+        [/list]
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: If a specific forum renders it differently, say which one.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened instead
+    validations:
+      required: true
+
+  - type: dropdown
+    id: dialect
+    attributes:
+      label: Dialect (bbcode.dialect)
+      options:
+        - generic (default)
+        - phpbb
+        - vbulletin
+        - xenforo
+        - smf
+        - mybb
+        - steam
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Extension version, VS Code version, and operating system.
+      placeholder: BBCode Preview 0.1.0, VS Code 1.96.0, macOS 15
+    validations:
+      required: true
+
+  - type: textarea
+    id: settings
+    attributes:
+      label: Relevant settings
+      description: Any non-default `bbcode.*` settings, especially custom tags.
+      render: jsonc

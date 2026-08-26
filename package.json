@@ -1,0 +1,565 @@
+{
+  "name": "bbcode-preview",
+  "displayName": "BBCode Preview",
+  "description": "Live preview, syntax highlighting, IntelliSense and formatting tools for forum BBCode — just like the built-in Markdown preview.",
+  "version": "0.1.0",
+  "publisher": "andreaolivato",
+  "license": "MIT",
+  "author": {
+    "name": "Andrea Olivato"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreaolivato/vscode-bbcode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andreaolivato/vscode-bbcode/issues"
+  },
+  "homepage": "https://github.com/andreaolivato/vscode-bbcode#readme",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#1f2430",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Visualization",
+    "Snippets"
+  ],
+  "keywords": [
+    "bbcode",
+    "preview",
+    "forum",
+    "phpbb",
+    "vbulletin",
+    "xenforo",
+    "smf",
+    "mybb",
+    "steam",
+    "markup"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:bbcode",
+    "onWebviewPanel:bbcode.preview"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "In untrusted workspaces, user-defined custom BBCode tags (bbcode.customTags) and custom preview stylesheets (bbcode.preview.customStyles) are ignored because they can inject arbitrary HTML and CSS into the preview."
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "bbcode",
+        "aliases": [
+          "BBCode",
+          "bbcode",
+          "Bulletin Board Code"
+        ],
+        "extensions": [
+          ".bbcode",
+          ".bbc",
+          ".bb"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/file-icon-light.svg",
+          "dark": "./images/file-icon-dark.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "bbcode",
+        "scopeName": "text.bbcode",
+        "path": "./syntaxes/bbcode.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.javascript": "javascript",
+          "meta.embedded.block.typescript": "typescript",
+          "meta.embedded.block.html": "html",
+          "meta.embedded.block.css": "css",
+          "meta.embedded.block.python": "python",
+          "meta.embedded.block.php": "php",
+          "meta.embedded.block.json": "json",
+          "meta.embedded.block.sql": "sql",
+          "meta.embedded.block.xml": "xml",
+          "meta.embedded.block.shellscript": "shellscript"
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "bbcode",
+        "path": "./snippets/bbcode.code-snippets"
+      }
+    ],
+    "commands": [
+      {
+        "command": "bbcode.showPreview",
+        "title": "Open Preview",
+        "category": "BBCode",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "bbcode.showPreviewToSide",
+        "title": "Open Preview to the Side",
+        "category": "BBCode",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "bbcode.showSource",
+        "title": "Show Source",
+        "category": "BBCode",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "bbcode.refreshPreview",
+        "title": "Refresh Preview",
+        "category": "BBCode",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "bbcode.copyAsHtml",
+        "title": "Copy as HTML",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.exportHtml",
+        "title": "Export as Standalone HTML File...",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.toggleBold",
+        "title": "Toggle Bold",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.toggleItalic",
+        "title": "Toggle Italic",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.toggleUnderline",
+        "title": "Toggle Underline",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.toggleStrikethrough",
+        "title": "Toggle Strikethrough",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.insertLink",
+        "title": "Insert Link",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.insertImage",
+        "title": "Insert Image",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.insertColor",
+        "title": "Insert Color",
+        "category": "BBCode"
+      },
+      {
+        "command": "bbcode.wrapWithTag",
+        "title": "Wrap Selection with Tag...",
+        "category": "BBCode"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "bbcode.showPreviewToSide",
+          "when": "editorLangId == bbcode && !notebookEditorFocused",
+          "alt": "bbcode.showPreview",
+          "group": "navigation"
+        },
+        {
+          "command": "bbcode.showSource",
+          "when": "bbcodePreviewFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "bbcode.refreshPreview",
+          "when": "bbcodePreviewFocus",
+          "group": "navigation"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "bbcode.showPreview",
+          "when": "resourceLangId == bbcode",
+          "group": "1_open"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "bbcode.showPreview",
+          "when": "resourceLangId == bbcode",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "bbcode.wrapWithTag",
+          "when": "editorLangId == bbcode && editorHasSelection",
+          "group": "1_modification"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "bbcode.showSource",
+          "when": "bbcodePreviewFocus"
+        },
+        {
+          "command": "bbcode.refreshPreview",
+          "when": "bbcodePreviewFocus"
+        },
+        {
+          "command": "bbcode.toggleBold",
+          "when": "editorLangId == bbcode"
+        },
+        {
+          "command": "bbcode.toggleItalic",
+          "when": "editorLangId == bbcode"
+        },
+        {
+          "command": "bbcode.toggleUnderline",
+          "when": "editorLangId == bbcode"
+        },
+        {
+          "command": "bbcode.toggleStrikethrough",
+          "when": "editorLangId == bbcode"
+        },
+        {
+          "command": "bbcode.insertLink",
+          "when": "editorLangId == bbcode"
+        },
+        {
+          "command": "bbcode.insertImage",
+          "when": "editorLangId == bbcode"
+        },
+        {
+          "command": "bbcode.insertColor",
+          "when": "editorLangId == bbcode"
+        },
+        {
+          "command": "bbcode.wrapWithTag",
+          "when": "editorLangId == bbcode"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "bbcode.showPreview",
+        "key": "shift+ctrl+v",
+        "mac": "shift+cmd+v",
+        "when": "editorLangId == bbcode && !notebookEditorFocused"
+      },
+      {
+        "command": "bbcode.showPreviewToSide",
+        "key": "ctrl+k v",
+        "mac": "cmd+k v",
+        "when": "editorLangId == bbcode && !notebookEditorFocused"
+      },
+      {
+        "command": "bbcode.toggleBold",
+        "key": "ctrl+b",
+        "mac": "cmd+b",
+        "when": "editorTextFocus && editorLangId == bbcode"
+      },
+      {
+        "command": "bbcode.toggleItalic",
+        "key": "ctrl+i",
+        "mac": "cmd+i",
+        "when": "editorTextFocus && editorLangId == bbcode"
+      },
+      {
+        "command": "bbcode.toggleUnderline",
+        "key": "ctrl+u",
+        "mac": "cmd+u",
+        "when": "editorTextFocus && editorLangId == bbcode"
+      },
+      {
+        "command": "bbcode.insertLink",
+        "key": "ctrl+k ctrl+l",
+        "mac": "cmd+k cmd+l",
+        "when": "editorTextFocus && editorLangId == bbcode"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "BBCode",
+        "properties": {
+          "bbcode.dialect": {
+            "type": "string",
+            "default": "generic",
+            "enum": [
+              "generic",
+              "phpbb",
+              "vbulletin",
+              "xenforo",
+              "smf",
+              "mybb",
+              "steam"
+            ],
+            "enumDescriptions": [
+              "A superset of the most common tags across forum engines.",
+              "phpBB 3.x tag set and conventions ([size] as a percentage).",
+              "vBulletin tag set ([size] on the 1-7 scale).",
+              "XenForo tag set, including [media] and [user].",
+              "Simple Machines Forum tag set.",
+              "MyBB tag set.",
+              "Steam Community / Workshop tag set ([h1]-[h3], [olist], [strike])."
+            ],
+            "markdownDescription": "Which forum flavour of BBCode to assume. This affects which tags are known to IntelliSense and diagnostics, and how ambiguous values such as `[size]` are interpreted.",
+            "scope": "language-overridable"
+          },
+          "bbcode.customTags": {
+            "type": "array",
+            "default": [],
+            "markdownDescription": "Additional BBCode tags recognised by the preview, IntelliSense and diagnostics.\n\nThe `html` template supports the placeholders `${content}`, `${value}` and `${param.NAME}`; all substituted values are HTML-escaped. Ignored in untrusted workspaces.",
+            "scope": "resource",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "html"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Tag name without brackets, for example \"steam\".",
+                  "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"
+                },
+                "html": {
+                  "type": "string",
+                  "markdownDescription": "HTML template, for example `<a href=\"https://steamcommunity.com/id/${content}\">${content}</a>`."
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Documentation shown in IntelliSense and on hover."
+                },
+                "selfClosing": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "The tag has no closing counterpart, for example [hr]."
+                },
+                "raw": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Do not parse BBCode inside this tag, like [code]."
+                },
+                "block": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Render as a block-level element rather than inline."
+                }
+              }
+            }
+          },
+          "bbcode.validate.enabled": {
+            "type": "boolean",
+            "default": true,
+            "description": "Report unclosed tags, stray closing tags and misplaced list items as you type.",
+            "scope": "resource"
+          },
+          "bbcode.validate.unknownTags": {
+            "type": "string",
+            "default": "hint",
+            "enum": [
+              "ignore",
+              "hint",
+              "information",
+              "warning"
+            ],
+            "description": "Severity used when a tag is not part of the selected dialect and is not a custom tag.",
+            "scope": "resource"
+          },
+          "bbcode.suggest.enabled": {
+            "type": "boolean",
+            "default": true,
+            "description": "Suggest BBCode tags, parameters and values while typing.",
+            "scope": "resource"
+          },
+          "bbcode.suggest.autoCloseTags": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "Automatically insert the matching closing tag after typing `]` on an opening tag.",
+            "scope": "resource"
+          },
+          "bbcode.preview.theme": {
+            "type": "string",
+            "default": "auto",
+            "enum": [
+              "auto",
+              "editor",
+              "forum-light",
+              "forum-dark"
+            ],
+            "enumDescriptions": [
+              "Follow the active VS Code colour theme, using a forum-like layout.",
+              "Use the exact colours of the active VS Code colour theme.",
+              "A light forum skin, regardless of the VS Code theme.",
+              "A dark forum skin, regardless of the VS Code theme."
+            ],
+            "description": "Colour scheme used by the preview panel."
+          },
+          "bbcode.preview.fontFamily": {
+            "type": "string",
+            "default": "",
+            "description": "Font family used by the preview. Leave empty to use the theme default."
+          },
+          "bbcode.preview.fontSize": {
+            "type": "number",
+            "default": 14,
+            "minimum": 8,
+            "maximum": 40,
+            "description": "Base font size, in pixels, used by the preview."
+          },
+          "bbcode.preview.maxWidth": {
+            "type": "number",
+            "default": 900,
+            "minimum": 0,
+            "description": "Maximum content width in pixels. Use 0 for full width."
+          },
+          "bbcode.preview.customStyles": {
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "markdownDescription": "A list of URLs or local (workspace-relative) paths to CSS files to load in the preview. Ignored in untrusted workspaces.",
+            "scope": "resource"
+          },
+          "bbcode.preview.newlineMode": {
+            "type": "string",
+            "default": "br",
+            "enum": [
+              "br",
+              "paragraph"
+            ],
+            "enumDescriptions": [
+              "Every line break becomes a <br>, like most forum engines.",
+              "Blank lines start a new paragraph; single line breaks become a <br>."
+            ],
+            "description": "How line breaks in the source are turned into HTML."
+          },
+          "bbcode.preview.autoLink": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "Turn bare URLs and e-mail addresses into links, even without a `[url]` tag.",
+            "scope": "resource"
+          },
+          "bbcode.preview.emoticons": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "Replace text emoticons such as `:)` and `:P` with emoji.",
+            "scope": "resource"
+          },
+          "bbcode.preview.remoteImages": {
+            "type": "boolean",
+            "default": true,
+            "description": "Load images hosted on remote servers. Disable to keep the preview fully offline.",
+            "scope": "resource"
+          },
+          "bbcode.preview.embedVideos": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "Embed players for `[youtube]`, `[vimeo]` and `[media]` tags. When disabled a plain link is shown instead.",
+            "scope": "resource"
+          },
+          "bbcode.preview.unknownTags": {
+            "type": "string",
+            "default": "text",
+            "enum": [
+              "text",
+              "strip"
+            ],
+            "enumDescriptions": [
+              "Show unknown tags verbatim, like most forum engines do.",
+              "Remove unknown tags and keep their content."
+            ],
+            "description": "How the preview renders tags it does not recognise."
+          },
+          "bbcode.preview.scrollPreviewWithEditor": {
+            "type": "boolean",
+            "default": true,
+            "description": "Scroll the preview to follow the cursor and viewport of the editor."
+          },
+          "bbcode.preview.scrollEditorWithPreview": {
+            "type": "boolean",
+            "default": true,
+            "description": "Scroll the editor to follow the viewport of the preview."
+          },
+          "bbcode.preview.doubleClickToSwitchToEditor": {
+            "type": "boolean",
+            "default": true,
+            "description": "Double-clicking in the preview moves the cursor to the matching line in the editor."
+          },
+          "bbcode.preview.openLinksExternally": {
+            "type": "boolean",
+            "default": true,
+            "description": "Open http and https links from the preview in the system browser."
+          }
+        }
+      }
+    ],
+    "configurationDefaults": {
+      "[bbcode]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+          "other": true,
+          "comments": false,
+          "strings": true
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.mjs",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.mjs --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.mjs --production",
+    "check-types": "tsc --noEmit --project tsconfig.json",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "docs": "npm run compile-tests && node scripts/generate-docs.mjs",
+    "grammar": "node scripts/generate-grammar.mjs",
+    "icon": "node scripts/generate-icon.mjs",
+    "compile-tests": "tsc --project tsconfig.test.json",
+    "watch-tests": "tsc --watch --project tsconfig.test.json",
+    "test:unit": "npm run compile-tests && mocha \"out/test/unit/**/*.test.js\"",
+    "test:integration": "npm run compile-tests && node esbuild.mjs && vscode-test --label integration",
+    "test": "npm run test:unit && npm run test:integration",
+    "vsix": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.20.1",
+    "@types/vscode": "^1.96.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.1.0",
+    "@vscode/vsce": "^3.9.2",
+    "esbuild": "^0.28.2",
+    "eslint": "^9.39.5",
+    "glob": "^11.1.0",
+    "mocha": "^11.8.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.68.0"
+  }
+}

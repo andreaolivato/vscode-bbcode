@@ -1,0 +1,958 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "BBCode",
+    "scopeName": "text.bbcode",
+    "patterns": [
+        {
+            "include": "#raw-blocks"
+        },
+        {
+            "include": "#styled"
+        },
+        {
+            "include": "#list-item"
+        },
+        {
+            "include": "#closing-tag"
+        },
+        {
+            "include": "#opening-tag"
+        },
+        {
+            "include": "#entity"
+        }
+    ],
+    "repository": {
+        "raw-blocks": {
+            "patterns": [
+                {
+                    "name": "meta.embedded.block.javascript.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(js|javascript|jsx|node)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.javascript",
+                    "patterns": [
+                        {
+                            "include": "source.js"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.typescript.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(ts|typescript|tsx)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.typescript",
+                    "patterns": [
+                        {
+                            "include": "source.ts"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.html.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(html|htm|xhtml)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.html",
+                    "patterns": [
+                        {
+                            "include": "text.html.basic"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.css.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(css|scss|less)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.css",
+                    "patterns": [
+                        {
+                            "include": "source.css"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.python.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(py|python|python3)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.python",
+                    "patterns": [
+                        {
+                            "include": "source.python"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.php.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(php|php5|php7|php8)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.php",
+                    "patterns": [
+                        {
+                            "include": "source.php"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.json.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(json|jsonc)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.json",
+                    "patterns": [
+                        {
+                            "include": "source.json"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.sql.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(sql|mysql|postgres|postgresql)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.sql",
+                    "patterns": [
+                        {
+                            "include": "source.sql"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.xml.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(xml|xsl|svg)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.xml",
+                    "patterns": [
+                        {
+                            "include": "text.xml"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.shellscript.bbcode",
+                    "begin": "(?i)(\\[)(code)(=)(sh|bash|shell|zsh|console)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "4": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.shellscript",
+                    "patterns": [
+                        {
+                            "include": "source.shell"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.embedded.block.php.bbcode",
+                    "begin": "(?i)(\\[)(php)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(php)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.php",
+                    "patterns": [
+                        {
+                            "include": "source.php"
+                        }
+                    ]
+                },
+                {
+                    "name": "markup.raw.block.bbcode",
+                    "begin": "(?i)(\\[)(noparse|plain|nobbc)(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(noparse|plain|nobbc)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.raw.bbcode"
+                },
+                {
+                    "name": "markup.raw.block.bbcode",
+                    "begin": "(?i)(\\[)(code|icode|pre)((=)([^\\]]*))?(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "5": {
+                            "name": "constant.language.bbcode"
+                        },
+                        "6": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(code|icode|pre)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.raw.bbcode"
+                }
+            ]
+        },
+        "styled": {
+            "patterns": [
+                {
+                    "name": "meta.bold.bbcode",
+                    "begin": "(?i)(\\[)(b|bold)((=)([^\\]]*))?(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "5": {
+                            "name": "string.unquoted.bbcode"
+                        },
+                        "6": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(b|bold)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.bold.bbcode",
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.italic.bbcode",
+                    "begin": "(?i)(\\[)(i|italic)((=)([^\\]]*))?(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "5": {
+                            "name": "string.unquoted.bbcode"
+                        },
+                        "6": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(i|italic)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.italic.bbcode",
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.underline.bbcode",
+                    "begin": "(?i)(\\[)(u|underline)((=)([^\\]]*))?(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "5": {
+                            "name": "string.unquoted.bbcode"
+                        },
+                        "6": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(u|underline)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.underline.bbcode",
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.strikethrough.bbcode",
+                    "begin": "(?i)(\\[)(s|strike|strikethrough|del)((=)([^\\]]*))?(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "5": {
+                            "name": "string.unquoted.bbcode"
+                        },
+                        "6": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(s|strike|strikethrough|del)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.strikethrough.bbcode",
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.quote.bbcode",
+                    "begin": "(?i)(\\[)(quote)((=)([^\\]]*))?(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "5": {
+                            "name": "string.unquoted.bbcode"
+                        },
+                        "6": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(quote)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.quote.bbcode",
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.heading.bbcode",
+                    "begin": "(?i)(\\[)(h1|h2|h3|h4|h5|h6)((=)([^\\]]*))?(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "5": {
+                            "name": "string.unquoted.bbcode"
+                        },
+                        "6": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(h1|h2|h3|h4|h5|h6)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.heading.bbcode",
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                },
+                {
+                    "name": "meta.link.bbcode",
+                    "begin": "(?i)(\\[)(url|link|email)((=)([^\\]]*))?(\\])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        },
+                        "5": {
+                            "name": "string.unquoted.bbcode"
+                        },
+                        "6": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "end": "(?i)(\\[)(/)(url|link|email)(\\])",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.tag.begin.bbcode"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.bbcode"
+                        },
+                        "4": {
+                            "name": "punctuation.definition.tag.end.bbcode"
+                        }
+                    },
+                    "contentName": "markup.underline.link.bbcode",
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                }
+            ]
+        },
+        "list-item": {
+            "name": "meta.tag.list-item.bbcode",
+            "match": "(?i)(\\[)(\\*)(\\])",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.tag.begin.bbcode"
+                },
+                "2": {
+                    "name": "keyword.control.bbcode"
+                },
+                "3": {
+                    "name": "punctuation.definition.tag.end.bbcode"
+                }
+            }
+        },
+        "closing-tag": {
+            "name": "meta.tag.close.bbcode",
+            "match": "(?i)(\\[)(/)([a-z*][a-z0-9*_.-]*)(\\])",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.tag.begin.bbcode"
+                },
+                "2": {
+                    "name": "punctuation.definition.tag.begin.bbcode"
+                },
+                "3": {
+                    "name": "entity.name.tag.bbcode"
+                },
+                "4": {
+                    "name": "punctuation.definition.tag.end.bbcode"
+                }
+            }
+        },
+        "opening-tag": {
+            "name": "meta.tag.open.bbcode",
+            "begin": "(?i)(\\[)([a-z*][a-z0-9*_.-]*)",
+            "beginCaptures": {
+                "1": {
+                    "name": "punctuation.definition.tag.begin.bbcode"
+                },
+                "2": {
+                    "name": "entity.name.tag.bbcode"
+                }
+            },
+            "end": "(\\])",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.tag.end.bbcode"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#attribute"
+                }
+            ]
+        },
+        "attribute": {
+            "patterns": [
+                {
+                    "match": "(?i)([a-z_][a-z0-9_-]*)\\s*(=)",
+                    "captures": {
+                        "1": {
+                            "name": "entity.other.attribute-name.bbcode"
+                        },
+                        "2": {
+                            "name": "punctuation.separator.key-value.bbcode"
+                        }
+                    }
+                },
+                {
+                    "match": "(=)",
+                    "name": "punctuation.separator.key-value.bbcode"
+                },
+                {
+                    "begin": "\"",
+                    "end": "\"",
+                    "name": "string.quoted.double.bbcode"
+                },
+                {
+                    "begin": "'",
+                    "end": "'",
+                    "name": "string.quoted.single.bbcode"
+                },
+                {
+                    "match": "#[0-9a-fA-F]{3,8}\\b",
+                    "name": "constant.other.color.bbcode"
+                },
+                {
+                    "match": "\\b\\d+(?:px|pt|em|rem|%)?\\b",
+                    "name": "constant.numeric.bbcode"
+                },
+                {
+                    "match": "[^\\s\\]=\"']+",
+                    "name": "string.unquoted.bbcode"
+                }
+            ]
+        },
+        "entity": {
+            "patterns": [
+                {
+                    "match": "&(?:[a-zA-Z][a-zA-Z0-9]*|#\\d+|#x[0-9a-fA-F]+);",
+                    "name": "constant.character.entity.bbcode"
+                }
+            ]
+        }
+    }
+}

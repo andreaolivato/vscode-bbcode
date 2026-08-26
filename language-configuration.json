@@ -1,0 +1,36 @@
+{
+    "comments": {
+        "blockComment": ["[noparse]", "[/noparse]"]
+    },
+    "brackets": [["[", "]"]],
+    "autoClosingPairs": [
+        { "open": "[", "close": "]" },
+        { "open": "\"", "close": "\"", "notIn": ["string"] }
+    ],
+    "surroundingPairs": [
+        ["[", "]"],
+        ["\"", "\""],
+        ["'", "'"]
+    ],
+    "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+    "onEnterRules": [
+        {
+            "beforeText": "^\\s*\\[\\*\\].*$",
+            "action": { "indent": "none", "appendText": "[*]" }
+        },
+        {
+            "beforeText": "^\\s*\\[li\\].*\\[/li\\]\\s*$",
+            "action": { "indent": "none", "appendText": "[li][/li]" }
+        }
+    ],
+    "indentationRules": {
+        "increaseIndentPattern": "\\[(list|ul|ol|olist|table|tr|quote|spoiler|box|code|indent)(=[^\\]]*)?\\]\\s*$",
+        "decreaseIndentPattern": "^\\s*\\[/(list|ul|ol|olist|table|tr|quote|spoiler|box|code|indent)\\]"
+    },
+    "folding": {
+        "markers": {
+            "start": "^\\s*\\[(list|ul|ol|olist|table|quote|spoiler|box|code)(=[^\\]]*)?\\]",
+            "end": "^\\s*\\[/(list|ul|ol|olist|table|quote|spoiler|box|code)\\]"
+        }
+    }
+}

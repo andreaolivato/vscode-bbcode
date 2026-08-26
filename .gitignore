@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+*.vsix
+
+# Test runner
+.vscode-test/
+.vscode-test-web/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+
+# Local overrides
+.vscode/settings.local.json
+.env
+.env.local

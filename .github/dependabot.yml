@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      dev-dependencies:
+        dependency-type: development
+        update-types: [minor, patch]
+    ignore:
+      # These two track the VS Code version in `engines.vscode`, not the latest
+      # release: @types/node must match the Node that VS Code's extension host
+      # runs on, and @types/vscode must not describe API newer than the oldest
+      # VS Code the extension supports. Raise `engines.vscode` first, then these.
+      - dependency-name: '@types/node'
+        update-types: [version-update:semver-major]
+      - dependency-name: '@types/vscode'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

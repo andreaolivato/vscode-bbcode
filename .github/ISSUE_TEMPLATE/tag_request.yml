@@ -1,0 +1,41 @@
+name: Missing tag
+description: A BBCode tag this extension does not know about.
+labels: [enhancement, tag]
+body:
+  - type: input
+    id: tag
+    attributes:
+      label: The tag
+      placeholder: "[spoiler]"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: dialect
+    attributes:
+      label: Which engines provide it
+      multiple: true
+      options: [phpBB, vBulletin, XenForo, SMF, MyBB, Steam, Other]
+    validations:
+      required: true
+
+  - type: textarea
+    id: syntax
+    attributes:
+      label: Its syntax
+      description: Including any value and named parameters it takes.
+      render: text
+      placeholder: "[spoiler=Title]hidden content[/spoiler]"
+    validations:
+      required: true
+
+  - type: textarea
+    id: html
+    attributes:
+      label: The HTML the forum produces
+      render: html
+
+  - type: input
+    id: docs
+    attributes:
+      label: Link to the engine's documentation

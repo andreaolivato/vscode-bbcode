@@ -1,0 +1,30 @@
+name: Feature request
+description: Suggest a tag, a setting, or a preview improvement.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What you are trying to do
+      description: The situation that made you want this, rather than the solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like
+    validations:
+      required: true
+
+  - type: input
+    id: engine
+    attributes:
+      label: Which forum engine
+      description: If this is about a specific engine's behaviour, name it and link its documentation.
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example BBCode
+      render: text

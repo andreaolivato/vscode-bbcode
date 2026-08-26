@@ -1,0 +1,118 @@
+{
+    "Bold": {
+        "prefix": ["b", "bold"],
+        "body": ["[b]${1:$TM_SELECTED_TEXT}[/b]$0"],
+        "description": "Bold text"
+    },
+    "Italic": {
+        "prefix": ["i", "italic"],
+        "body": ["[i]${1:$TM_SELECTED_TEXT}[/i]$0"],
+        "description": "Italic text"
+    },
+    "Underline": {
+        "prefix": ["u", "underline"],
+        "body": ["[u]${1:$TM_SELECTED_TEXT}[/u]$0"],
+        "description": "Underlined text"
+    },
+    "Strikethrough": {
+        "prefix": ["s", "strike"],
+        "body": ["[s]${1:$TM_SELECTED_TEXT}[/s]$0"],
+        "description": "Struck-through text"
+    },
+    "Colour": {
+        "prefix": ["color", "colour"],
+        "body": ["[color=${1:#ff8800}]${2:$TM_SELECTED_TEXT}[/color]$0"],
+        "description": "Coloured text"
+    },
+    "Size": {
+        "prefix": "size",
+        "body": ["[size=${1:150}]${2:$TM_SELECTED_TEXT}[/size]$0"],
+        "description": "Sized text"
+    },
+    "Link": {
+        "prefix": ["url", "link"],
+        "body": ["[url=${1:https://example.com}]${2:$TM_SELECTED_TEXT}[/url]$0"],
+        "description": "Hyperlink with a label"
+    },
+    "Bare link": {
+        "prefix": "urlbare",
+        "body": ["[url]${1:https://example.com}[/url]$0"],
+        "description": "Hyperlink showing the address"
+    },
+    "Image": {
+        "prefix": ["img", "image"],
+        "body": ["[img]${1:https://example.com/image.png}[/img]$0"],
+        "description": "Embedded image"
+    },
+    "Image with size": {
+        "prefix": "imgsize",
+        "body": ["[img width=${1:400}]${2:https://example.com/image.png}[/img]$0"],
+        "description": "Embedded image with an explicit width"
+    },
+    "Quote": {
+        "prefix": "quote",
+        "body": ["[quote=\"${1:author}\"]", "${2:$TM_SELECTED_TEXT}", "[/quote]", "$0"],
+        "description": "Quoted post"
+    },
+    "Code block": {
+        "prefix": "code",
+        "body": ["[code=${1:js}]", "${2:$TM_SELECTED_TEXT}", "[/code]", "$0"],
+        "description": "Code block with a language hint"
+    },
+    "Inline code": {
+        "prefix": "icode",
+        "body": ["[icode]${1:$TM_SELECTED_TEXT}[/icode]$0"],
+        "description": "Inline code"
+    },
+    "Spoiler": {
+        "prefix": ["spoiler", "hide"],
+        "body": ["[spoiler=${1:Spoiler}]", "${2:$TM_SELECTED_TEXT}", "[/spoiler]", "$0"],
+        "description": "Click-to-reveal box"
+    },
+    "Bulleted list": {
+        "prefix": ["list", "ul"],
+        "body": ["[list]", "[*]${1:First}", "[*]${2:Second}", "[/list]", "$0"],
+        "description": "Bulleted list"
+    },
+    "Numbered list": {
+        "prefix": ["olist", "ol"],
+        "body": ["[list=1]", "[*]${1:First}", "[*]${2:Second}", "[/list]", "$0"],
+        "description": "Numbered list"
+    },
+    "Table": {
+        "prefix": "table",
+        "body": [
+            "[table]",
+            "[tr][th]${1:Column}[/th][th]${2:Column}[/th][/tr]",
+            "[tr][td]${3:Value}[/td][td]${4:Value}[/td][/tr]",
+            "[/table]",
+            "$0"
+        ],
+        "description": "Table with a header row"
+    },
+    "Centre": {
+        "prefix": ["center", "centre"],
+        "body": ["[center]${1:$TM_SELECTED_TEXT}[/center]$0"],
+        "description": "Centred block"
+    },
+    "Heading": {
+        "prefix": ["h1", "heading"],
+        "body": ["[h1]${1:$TM_SELECTED_TEXT}[/h1]$0"],
+        "description": "First-level heading"
+    },
+    "YouTube": {
+        "prefix": ["youtube", "yt"],
+        "body": ["[youtube]${1:dQw4w9WgXcQ}[/youtube]$0"],
+        "description": "Embedded YouTube video"
+    },
+    "Horizontal rule": {
+        "prefix": "hr",
+        "body": ["[hr]", "$0"],
+        "description": "Horizontal rule"
+    },
+    "No parse": {
+        "prefix": ["noparse", "plain"],
+        "body": ["[noparse]${1:$TM_SELECTED_TEXT}[/noparse]$0"],
+        "description": "Show BBCode without interpreting it"
+    }
+}
