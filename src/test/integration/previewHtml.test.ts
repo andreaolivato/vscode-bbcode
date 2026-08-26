@@ -53,7 +53,7 @@ function build(config: Partial<PreviewConfig> = {}, body = '<p>hi</p>'): string 
     try {
         return buildPreviewDocument({
             webview: panel.webview,
-            extensionUri: vscode.extensions.getExtension('andreaolivato.bbcode-preview')!.extensionUri,
+            extensionUri: vscode.extensions.getExtension('gimucco.bbcode-preview')!.extensionUri,
             config: { ...BASE_CONFIG, ...config },
             body,
             title: 'Preview demo.bbcode',
@@ -137,7 +137,7 @@ describe('preview document', () => {
         try {
             const html = buildPreviewDocument({
                 webview: panel.webview,
-                extensionUri: vscode.extensions.getExtension('andreaolivato.bbcode-preview')!.extensionUri,
+                extensionUri: vscode.extensions.getExtension('gimucco.bbcode-preview')!.extensionUri,
                 config: BASE_CONFIG,
                 body: '',
                 title: '</title><script>alert(1)</script>',

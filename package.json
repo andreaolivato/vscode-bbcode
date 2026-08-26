@@ -3,7 +3,7 @@
   "displayName": "BBCode Preview",
   "description": "Live preview, syntax highlighting, IntelliSense and formatting tools for forum BBCode — just like the built-in Markdown preview.",
   "version": "0.1.0",
-  "publisher": "andreaolivato",
+  "publisher": "gimucco",
   "license": "MIT",
   "author": {
     "name": "Andrea Olivato"

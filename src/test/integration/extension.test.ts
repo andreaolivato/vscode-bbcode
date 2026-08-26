@@ -1,7 +1,7 @@
 import * as assert from 'node:assert/strict';
 import * as vscode from 'vscode';
 
-const EXTENSION_ID = 'andreaolivato.bbcode-preview';
+const EXTENSION_ID = 'gimucco.bbcode-preview';
 
 async function openSample(name: string): Promise<vscode.TextDocument> {
     const folder = vscode.workspace.workspaceFolders?.[0];
